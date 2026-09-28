@@ -941,42 +941,42 @@ async function exportWord() {
     return String(s ?? '—').replace(/[^\u0009\u000A\u000D\u0020-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}]/gu, '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function hdrCell(text, w) {
-    return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="DDEFE8"/><w:tcMar><w:top w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:pPr><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="47645F"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>${esc(text)}</w:t></w:r></w:p></w:tc>`;
+  function hdrCell(text, w, fill = 'CFE9E5', color = '315F5B') {
+    return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:tcMar><w:top w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:pPr><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="${color}"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>${esc(text)}</w:t></w:r></w:p></w:tc>`;
   }
 
-  function dataCell(text, shade, w) {
-    const fill = shade ? 'F4EDF7' : 'FFF9F2';
+  function dataCell(text, shade, w, altFill = 'E7F4F2', baseFill = 'F8FCFB') {
+    const fill = shade ? altFill : baseFill;
     return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:tcMar><w:top w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/><w:szCs w:val="18"/></w:rPr><w:t xml:space="preserve">${esc(text)}</w:t></w:r></w:p></w:tc>`;
   }
 
-  function emptyCell(cols, w) {
-    return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:gridSpan w:val="${cols}"/><w:shd w:val="clear" w:color="auto" w:fill="FFF9F2"/><w:tcMar><w:top w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:i/><w:color w:val="8B8192"/><w:sz w:val="18"/></w:rPr><w:t>No entries</w:t></w:r></w:p></w:tc>`;
+  function emptyCell(cols, w, fill = 'F8FCFB') {
+    return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:gridSpan w:val="${cols}"/><w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:tcMar><w:top w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:i/><w:color w:val="668A86"/><w:sz w:val="18"/></w:rPr><w:t>No entries</w:t></w:r></w:p></w:tc>`;
   }
 
   function row(cells) { return `<w:tr>${cells}</w:tr>`; }
 
   function sectionPara(icon, title) {
-    return `<w:p><w:pPr><w:spacing w:before="280" w:after="120"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="7B6D8D"/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t xml:space="preserve">${esc(icon+' '+title)}</w:t></w:r></w:p>`;
+    return `<w:p><w:pPr><w:spacing w:before="280" w:after="120"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="4D8F88"/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t xml:space="preserve">${esc(icon+' '+title)}</w:t></w:r></w:p>`;
   }
 
   function tableBorderXml() {
-    const b = `<w:top w:val="single" w:sz="4" w:space="0" w:color="C9BDD2"/><w:left w:val="single" w:sz="4" w:space="0" w:color="C9BDD2"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="C9BDD2"/><w:right w:val="single" w:sz="4" w:space="0" w:color="C9BDD2"/><w:insideH w:val="single" w:sz="4" w:space="0" w:color="C9BDD2"/><w:insideV w:val="single" w:sz="4" w:space="0" w:color="C9BDD2"/>`;
+    const b = `<w:top w:val="single" w:sz="4" w:space="0" w:color="A9D3CE"/><w:left w:val="single" w:sz="4" w:space="0" w:color="A9D3CE"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="A9D3CE"/><w:right w:val="single" w:sz="4" w:space="0" w:color="A9D3CE"/><w:insideH w:val="single" w:sz="4" w:space="0" w:color="A9D3CE"/><w:insideV w:val="single" w:sz="4" w:space="0" w:color="A9D3CE"/>`;
     return `<w:tblBorders>${b}</w:tblBorders>`;
   }
 
   // Adj/Scrap table (4 cols: 1560 2340 1560 3900 = 9360)
-  function makeAdjTable(entries) {
+  function makeAdjTable(entries, palette) {
     const widths = [1560, 2340, 1560, 3900];
     const tw = 9360;
-    let rows = row(hdrCell('Ítem',widths[0])+hdrCell('Adjusted Quantity',widths[1])+hdrCell('LPN',widths[2])+hdrCell('Adjustment Reason',widths[3]));
+    let rows = row(hdrCell('Ítem',widths[0],palette.header,palette.text)+hdrCell('Adjusted Quantity',widths[1],palette.header,palette.text)+hdrCell('LPN',widths[2],palette.header,palette.text)+hdrCell('Adjustment Reason',widths[3],palette.header,palette.text));
     if (!entries.length) {
-      rows += row(emptyCell(4, tw));
+      rows += row(emptyCell(4, tw, palette.base));
     } else {
       entries.forEach((e,i) => {
         const s = i%2===1;
         const qty = `${e.qty||''} ${e.units||''}`.trim();
-        rows += row(dataCell(e.item,s,widths[0])+dataCell(qty,s,widths[1])+dataCell(e.lpn,s,widths[2])+dataCell(e.reason,s,widths[3]));
+        rows += row(dataCell(e.item,s,widths[0],palette.alt,palette.base)+dataCell(qty,s,widths[1],palette.alt,palette.base)+dataCell(e.lpn,s,widths[2],palette.alt,palette.base)+dataCell(e.reason,s,widths[3],palette.alt,palette.base));
       });
     }
     return `<w:tbl><w:tblPr><w:tblW w:w="${tw}" w:type="dxa"/>${tableBorderXml()}<w:tblLook w:val="04A0"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widths[0]}"/><w:gridCol w:w="${widths[1]}"/><w:gridCol w:w="${widths[2]}"/><w:gridCol w:w="${widths[3]}"/></w:tblGrid>${rows}</w:tbl>`;
@@ -984,15 +984,16 @@ async function exportWord() {
 
   // Movement table (5 cols: 1400 1560 1800 1800 2800 = 9360)
   function makeMovTable(entries) {
+    const palette = { header:'CFE9E5', text:'315F5B', alt:'E7F4F2', base:'F8FCFB' };
     const widths = [1400,1560,1800,1800,2800];
     const tw = 9360;
-    let rows = row(hdrCell('Ítem',widths[0])+hdrCell('LPN',widths[1])+hdrCell('Previous Location',widths[2])+hdrCell('New Location',widths[3])+hdrCell('Movement Reason',widths[4]));
+    let rows = row(hdrCell('Ítem',widths[0],palette.header,palette.text)+hdrCell('LPN',widths[1],palette.header,palette.text)+hdrCell('Previous Location',widths[2],palette.header,palette.text)+hdrCell('New Location',widths[3],palette.header,palette.text)+hdrCell('Movement Reason',widths[4],palette.header,palette.text));
     if (!entries.length) {
-      rows += row(emptyCell(5, tw));
+      rows += row(emptyCell(5, tw, palette.base));
     } else {
       entries.forEach((e,i) => {
         const s = i%2===1;
-        rows += row(dataCell(e.item,s,widths[0])+dataCell(e.lpn,s,widths[1])+dataCell(e.prev||'—',s,widths[2])+dataCell(e.next||'—',s,widths[3])+dataCell(e.reason,s,widths[4]));
+        rows += row(dataCell(e.item,s,widths[0],palette.alt,palette.base)+dataCell(e.lpn,s,widths[1],palette.alt,palette.base)+dataCell(e.prev||'—',s,widths[2],palette.alt,palette.base)+dataCell(e.next||'—',s,widths[3],palette.alt,palette.base)+dataCell(e.reason,s,widths[4],palette.alt,palette.base));
       });
     }
     return `<w:tbl><w:tblPr><w:tblW w:w="${tw}" w:type="dxa"/>${tableBorderXml()}</w:tblPr><w:tblGrid><w:gridCol w:w="${widths[0]}"/><w:gridCol w:w="${widths[1]}"/><w:gridCol w:w="${widths[2]}"/><w:gridCol w:w="${widths[3]}"/><w:gridCol w:w="${widths[4]}"/></w:tblGrid>${rows}</w:tbl>`;
@@ -1000,15 +1001,16 @@ async function exportWord() {
 
   // Cycle table (4 cols same as adj)
   function makeCycleTable(entries) {
+    const palette = { header:'CFE9E5', text:'315F5B', alt:'E7F4F2', base:'F8FCFB' };
     const widths = [1560, 2340, 1560, 3900];
     const tw = 9360;
-    let rows = row(hdrCell('Ítem',widths[0])+hdrCell('Fully Found? (SI/NO)',widths[1])+hdrCell('LPN',widths[2])+hdrCell('Detail',widths[3]));
+    let rows = row(hdrCell('Ítem',widths[0],palette.header,palette.text)+hdrCell('Fully Found? (SI/NO)',widths[1],palette.header,palette.text)+hdrCell('LPN',widths[2],palette.header,palette.text)+hdrCell('Detail',widths[3],palette.header,palette.text));
     if (!entries.length) {
-      rows += row(emptyCell(4, tw));
+      rows += row(emptyCell(4, tw, palette.base));
     } else {
       entries.forEach((e,i) => {
         const s = i%2===1;
-        rows += row(dataCell(e.item,s,widths[0])+dataCell(e.found||'—',s,widths[1])+dataCell(e.lpn,s,widths[2])+dataCell(e.detail||e.reason,s,widths[3]));
+        rows += row(dataCell(e.item,s,widths[0],palette.alt,palette.base)+dataCell(e.found||'—',s,widths[1],palette.alt,palette.base)+dataCell(e.lpn,s,widths[2],palette.alt,palette.base)+dataCell(e.detail||e.reason,s,widths[3],palette.alt,palette.base));
       });
     }
     return `<w:tbl><w:tblPr><w:tblW w:w="${tw}" w:type="dxa"/>${tableBorderXml()}</w:tblPr><w:tblGrid><w:gridCol w:w="${widths[0]}"/><w:gridCol w:w="${widths[1]}"/><w:gridCol w:w="${widths[2]}"/><w:gridCol w:w="${widths[3]}"/></w:tblGrid>${rows}</w:tbl>`;
@@ -1027,14 +1029,14 @@ async function exportWord() {
   const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
 <w:body>
-<w:p><w:pPr><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="5F7896"/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>PASS OFF - Shift Handoff Report</w:t></w:r></w:p>
-<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="B8A9C9"/></w:pBdr><w:spacing w:after="300"/></w:pPr><w:r><w:rPr><w:color w:val="8B8192"/><w:sz w:val="18"/></w:rPr><w:t>Generated: ${esc(genDate)}</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="3F7772"/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>PASS OFF - Shift Handoff Report</w:t></w:r></w:p>
+<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="78B9B2"/></w:pBdr><w:spacing w:after="300"/></w:pPr><w:r><w:rPr><w:color w:val="668A86"/><w:sz w:val="18"/></w:rPr><w:t>Generated: ${esc(genDate)}</w:t></w:r></w:p>
 ${sectionPara('', 'General Information')}
 ${infoTable}
 ${sectionPara('', 'Adjustments Made')}
-${makeAdjTable(data.adj)}
+${makeAdjTable(data.adj, { header:'CFE9E5', text:'315F5B', alt:'E7F4F2', base:'F8FCFB' })}
 ${sectionPara('', 'Scrap Performed')}
-${makeAdjTable(data.scrap)}
+${makeAdjTable(data.scrap, { header:'CFE9E5', text:'315F5B', alt:'E7F4F2', base:'F8FCFB' })}
 ${sectionPara('', 'Movements Performed')}
 ${makeMovTable(data.mov)}
 ${sectionPara('', 'Inventory Cycle Counts')}
