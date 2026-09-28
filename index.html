@@ -249,21 +249,210 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase;
     letter-spacing: 0.06em; margin: 1rem 0 0.5rem;
   }
+
+  /* 2026 redesign — industrial control-room visual system */
+  :root {
+    --bg: #07111f;
+    --surface: #f8fafc;
+    --surface2: #edf2f7;
+    --border: #d7e0ea;
+    --border2: #aab8c8;
+    --text: #102033;
+    --text2: #526276;
+    --text3: #7e8da0;
+    --purple: #0b6e69;
+    --purple-light: #dff5f1;
+    --purple-mid: #6dc6bc;
+    --blue: #123b63;
+    --blue-light: #e7f0f8;
+    --red: #a9362b;
+    --red-light: #fff0ed;
+    --green: #0b6e69;
+    --green-light: #dff5f1;
+    --amber: #8a5a00;
+    --amber-light: #fff3d6;
+    --radius: 4px;
+    --radius-sm: 3px;
+    --shadow: 0 18px 50px rgba(0, 9, 20, .22);
+  }
+
+  body {
+    font-family: Inter, "Aptos", "Segoe UI", system-ui, sans-serif;
+    background:
+      linear-gradient(rgba(9, 24, 42, .94), rgba(9, 24, 42, .98)),
+      repeating-linear-gradient(90deg, transparent 0 79px, rgba(255,255,255,.04) 80px),
+      repeating-linear-gradient(0deg, transparent 0 79px, rgba(255,255,255,.04) 80px),
+      #07111f;
+    color: var(--text);
+    font-size: 15px;
+  }
+
+  header {
+    height: 82px;
+    padding: 0 clamp(1rem, 4vw, 4rem);
+    color: white;
+    background: rgba(7, 17, 31, .92);
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,.28);
+    backdrop-filter: blur(12px);
+  }
+  .logo { gap: 14px; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    border-radius: 2px;
+    background: #f4b942;
+    color: #07111f;
+    box-shadow: 7px 7px 0 #0b6e69;
+    font-size: 20px;
+  }
+  .logo-text { color: white; font-size: 18px; font-weight: 750; letter-spacing: .08em; }
+  .logo-sub { color: #9fb1c7; font-size: 12px; letter-spacing: .06em; margin-top: 1px; }
+
+  .main {
+    max-width: 1440px;
+    padding: 2rem clamp(1rem, 4vw, 4rem) 5.5rem;
+    grid-template-columns: minmax(360px, 430px) minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .card {
+    border: 0;
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-header {
+    min-height: 54px;
+    padding: .9rem 1.15rem;
+    color: white;
+    background: #123b63;
+    border: 0;
+    border-left: 5px solid #f4b942;
+  }
+  .card-icon {
+    width: 28px; height: 28px;
+    display: inline-grid; place-items: center;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+    font-size: 14px;
+  }
+  .card-title { color: white; font-size: 13px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+  .card-body { padding: 1.15rem; }
+
+  label { color: #405269; font-size: 12px; font-weight: 700; letter-spacing: .02em; margin-bottom: 6px; }
+  textarea, select, input[type="text"] {
+    min-height: 43px;
+    background: white;
+    border: 1px solid #bdc9d6;
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  textarea:focus, select:focus, input:focus {
+    border-color: #0b6e69;
+    box-shadow: 0 0 0 3px rgba(11,110,105,.16);
+  }
+  textarea { min-height: 145px; line-height: 1.55; }
+  .field { margin-bottom: 15px; }
+
+  .btn {
+    min-height: 42px;
+    border-radius: 3px;
+    padding: 9px 16px;
+    font-weight: 750;
+    letter-spacing: .02em;
+  }
+  .btn-primary { background: #0b6e69; border-color: #0b6e69; }
+  .btn-primary:hover { background: #085752; transform: translateY(-1px); }
+  .btn-success { background: #f4b942; color: #07111f; border-color: #f4b942; }
+  .btn-success:hover { background: #ffd070; }
+  .btn-outline { background: transparent; color: #dce7f4; border-color: #64778e; }
+  .btn-outline:hover { color: white; background: rgba(255,255,255,.08); }
+
+  .preview-box { background: #e7f5f3; border-color: #75bcb4; border-left: 4px solid #0b6e69; }
+  .preview-label { color: #075d58; }
+  .chip { border-color: #84bdb7; border-radius: 2px; }
+  .manual-box { background: #f1f5f9; border: 1px dashed #8fa0b4; border-radius: 3px; }
+
+  .tabs {
+    gap: 4px;
+    padding: 10px 10px 0;
+    background: #102b47;
+    border: 0;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 12px 14px;
+    color: #aebdd0;
+    border: 0;
+    border-radius: 3px 3px 0 0;
+  }
+  .tab:hover { color: white; background: rgba(255,255,255,.07); }
+  .tab.active { color: #102033; background: white; border: 0; }
+  .count-badge { background: rgba(255,255,255,.12); color: inherit; }
+  .tab.active .count-badge { background: #f4b942; color: #102033; }
+  .tab-panel { padding: 1.25rem; min-height: 370px; }
+  table { font-size: 13px; }
+  th {
+    padding: 12px 11px;
+    background: #e5ebf2;
+    color: #29405a;
+    border-bottom: 2px solid #123b63;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: 10px;
+  }
+  td { padding: 12px 11px; }
+  tr:nth-child(even) td { background: #f7f9fb; }
+  .lpn-code { border-radius: 2px; background: #e5ebf2; border-color: #c1ccd8; }
+  .empty { padding: 5rem 2rem; }
+
+  .export-bar {
+    width: min(920px, calc(100% - 2rem));
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 4px;
+    background: #102b47;
+    color: white;
+    box-shadow: 0 16px 45px rgba(0,0,0,.35);
+  }
+  .export-info { color: #b6c5d6; }
+  .export-info strong { color: #f4b942; font-size: 17px; }
+  #toast { background: #f4b942; color: #07111f; border-radius: 3px; font-weight: 750; }
+
+  @media (max-width: 900px) {
+    header { height: auto; min-height: 78px; gap: 12px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+    .main { grid-template-columns: 1fr; padding-top: 1rem; }
+    .info-grid { grid-template-columns: 1fr; gap: 0; }
+    .export-bar { width: calc(100% - 1rem); bottom: 8px; }
+  }
+  @media (max-width: 560px) {
+    .logo-sub { display: none; }
+    header .btn-row { width: 100%; }
+    header .btn { flex: 1; justify-content: center; }
+    .tabs { padding-right: 6px; }
+    .tab { font-size: 12px; padding: 10px; }
+    .export-info { display: none; }
+    .export-bar { justify-content: stretch; }
+    .export-bar .btn-row, .export-bar .btn { width: 100%; justify-content: center; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">
-    <div class="logo-icon">P</div>
+    <div class="logo-icon">↗</div>
     <div>
-      <div class="logo-text">PASS OFF Builder</div>
-      <div class="logo-sub">Shift Handoff Report Tool</div>
+      <div class="logo-text">SHIFT CONTROL</div>
+      <div class="logo-sub">PASS OFF · OPERATIONS REPORT</div>
     </div>
   </div>
   <div class="btn-row">
-    <button class="btn btn-outline btn-sm" onclick="clearAll()">🗑 Clear all</button>
-    <button class="btn btn-success" onclick="exportWord()">⬇ Export Word (.docx)</button>
+    <button class="btn btn-outline btn-sm" onclick="clearAll()">↺ Clear report</button>
+    <button class="btn btn-success" onclick="exportWord()">Export Word</button>
   </div>
 </header>
 
@@ -749,7 +938,7 @@ async function exportWord() {
   const obs      = document.getElementById('observations').value || 'No observations.';
 
   function esc(s) {
-    return String(s||'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return String(s ?? '—').replace(/[^\u0009\u000A\u000D\u0020-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}]/gu, '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
   function hdrCell(text, w) {
@@ -836,10 +1025,10 @@ async function exportWord() {
   const genDate = new Date().toLocaleString();
 
   const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
 <w:body>
 <w:p><w:pPr><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:b/><w:color w:val="1E3A5F"/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>PASS OFF - Shift Handoff Report</w:t></w:r></w:p>
-<w:p><w:pPr><w:spacing w:after="300"/><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="1E3A5F"/></w:pBdr></w:pPr><w:r><w:rPr><w:color w:val="888888"/><w:sz w:val="18"/></w:rPr><w:t>Generated: ${esc(genDate)}</w:t></w:r></w:p>
+<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="1E3A5F"/></w:pBdr><w:spacing w:after="300"/></w:pPr><w:r><w:rPr><w:color w:val="888888"/><w:sz w:val="18"/></w:rPr><w:t>Generated: ${esc(genDate)}</w:t></w:r></w:p>
 ${sectionPara('', 'General Information')}
 ${infoTable}
 ${sectionPara('', 'Adjustments Made')}
@@ -883,7 +1072,7 @@ ${obsParas}
 <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
 <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
 <Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
-<Override PartName="/docProps/core.xml" ContentType="application/package.core-properties+xml"/>
+<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
 </Types>`;
 
   const rootRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -911,8 +1100,10 @@ ${obsParas}
     const dateStr = (document.getElementById('gDate').value||'').replace(/\//g,'-');
     const lineStr = (document.getElementById('gLine').value||'Line').replace(/[^a-zA-Z0-9]/g,'_');
     a.download = `PassOff_${lineStr}_${dateStr}.docx`;
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
     showToast('✅ Document downloaded!');
   } catch(err) {
     console.error(err);
